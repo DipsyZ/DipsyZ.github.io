@@ -1,0 +1,453 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition | DCDD-Space</title><meta name="keywords" content="分布式图计算、大图划分"><meta name="author" content="DCDD"><meta name="copyright" content="DCDD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"><meta name="application-name" content="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"><meta property="og:url" content="https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/index.html"><meta property="og:site_name" content="DCDD-Space"><meta property="og:description" content="Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced PartitionIEEE TRANSACTIONS ON PARALLEL AND DISTRIBUTED SYSTEMS, VOL. 32, N"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://dipsyz.github.io/media/16467445002049/16471619300445.jpg"><meta property="article:author" content="DCDD"><meta property="article:tag" content="dcdd"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://dipsyz.github.io/media/16467445002049/16471619300445.jpg"><meta name="description" content="Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced PartitionIEEE TRANSACTIONS ON PARALLEL AND DISTRIBUTED SYSTEMS, VOL. 32, N"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: DCDD","link":"链接: ","source":"来源: DCDD-Space","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'DCDD-Space',
+  title: '【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition',
+  postAI: '',
+  pageFillDescription: 'Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition, 摘要：, 1.Introduction, 2 Preliminaries ——   DAIC, 2.1 Asynchronous DAIC and Prioritized Execution, 2.2 Prioritized DAIC Graph Algorithms, 3 PROBLEM FORMULATION, 3.1 Hotness Estimation, 3.2 patition goals, 4.SPB-HBP （Streaming-based Per-Bin Hotness Balanced Partition）, 4.1 Per-Bin Hotness Balanced Partition, 4.2 Streaming-Based Heuristic Algorithm, 5 DISTRIBUTED SPB-HBP摘要优先计算在许多图算法中表现出良好的性能优先计算优先执行那些在指定收敛中起重要作用的顶点对于大规模分布式图计算来说图分区是一个重要的预处理步骤目的是负载均衡和降低节点之间的通信成本然而现有的图分区方法是为轮询同步分布式框架设计的他们在不区分顶点重要性的情况下负载均衡并且没有考虑基于优先级调度的特性这可能会限制优先图计算的好处在本文中为了加速优先迭代图计算我们提出了在优先图计算中高优先级的顶点可能会被更频繁地执行并且可能会传递更多的消息从而导致热点顶点基于这一点文章通过根据热度有区别地分配顶点而不是盲目地分配权重相等的顶点来划分图目的是将均匀地分配给文章进一步提供了两种算法和我们的结果表明我们提出的分区方法优于最先进的分区方法和分布式图处理系统将大规模图分片每一个集群上的负责处理一个大量的点边分割会加大通信成本由于各节点工作负载不均衡可能会导致出现闲置的降低计算效率都采用了一个假设底层的分布式图框架采用在每一次迭代之后有一个全局同步屏障在机制下实现简单而使用广泛在每次迭代中每个点被执行一次每条边只传递一条信息因此在图分区中点的数量边的数量表明了的工作量表明了通信的成本故现存的图分割算法的目标平衡点边数量减少切边点分割的数量近期采用的一些图系统消除了全局同步障碍之间不必等待边点可以在任何时间执行取消了一次迭代只能执行一次的约束所以相同时间间隔内有些点边比其他执行的次数更多在近期的研究中发现有些点对于最终收敛结果更加重要在异步计算中顶点的重要性不是持续不变的在优先计算中只有一部分顶点在一轮迭代中执行这些顶点计算的更加频繁优先计算比轮询计算平均快倍算法采用优先调度每次迭代执行顶点子集传统的图分割会限制计算性能图划分通用算法哈希划分算法为每个数据项点或者边计算一个哈希值将其映射到一个划分出的子图中图流划分是图划分问题的一个新的衍生与传统图划分算法相比图流划分算法不在执行划分算法的计算机上存储完整的图而是对持续不断地读入的边或者点进行实时划分这些读入的点或边可以源自计算机集群的硬盘或者是直接从数据源获取的动态数据由于不需要在单机上存储完整的图数据图流划分算法相比传统图划分算法可以应用于更大规模的图同时具有时间复杂度低可以处理动态数据的优势但是由于其缺少完整的图数据图流划分的难度更大而且划分效果往往略差于传统图划分算法图流划分两种点划分使用点流模型每次读入的数据项为一个点及其完整的邻接列表边划分使用边流模型每次读入的数据项为一条单独的边年论文将图流划分问题划归为流上的模块最大化问题更高因为没有考虑到点的优先级如下图点需要更高的计算资源节点间负载不均衡会导致计算收敛慢对于点之间会导致通信成本剧增也会上升并不意味着着计算高效消除了不同机器之间不用彼此等待没有空闲节点对收敛重要的顶点需要更多计算资源在图分割中需要重点考虑如何处理这些顶点小数量的边切割顶点复制不一定意味较少的通信资源开销需要一个针对的图分割方法启发式的基于图流模型的图分割分布式场景顶点可以基于其获得的入边邻居顶点的信息在任意时刻进行状态操作异步模式可表示为两步操作其中是顶点的任意邻居顶点发来的信息每个顶点设置有一块缓存用来保存这些作为用作更新值当顶点判断其缓存的信息包含了所有入边邻居顶点在状态下的信息时即可执行更新操作进入状态发送权值给出边邻居顶点并将缓存清零传统同步迭代图算法的迭代更新表示是更新函数是迭代次数异步模型顶点可以在任何时间更新比收敛更快因此找到重要的顶点非常重要找重点顶点的方法高优先级顶点使整幅图变化最大的点注是单调的优先执行就是在这些顶点上优先计算加速收敛本文目标是为优先执行找到一种优化的图分割方式一些优先图算法的举例阻尼系数图标签传播算法还可以使用的图算法维护排序的代价很大近似方法的大小平衡排序的精确度与频繁截取的开销本节两点内容如何估计的与原顶点更新次数成正比估计为源顶点的每个每轮选择顶点执行若则中效率低下总能选到一个蓝色顶点进行计算理想状态开销过大实际理论概率分布概率分布相似性衡量指标计算分区和图的分布相似度如果说明与全局热度分布一致越小一致性越高中问题定义由得出与满足任一两个同时满足两者合并为一个条件为贪婪算法新扫描到的顶点会分配给已当前分区中的一个分区合并中的个提出的损失函数表示将加入引起的不平衡表示增加的通信成本在本文中主要展示但也可以延伸进场景不用复制只需要分配给不同的需要复制实际只存储一份所以不需要传递而则需要传递存储和通信负载取决于数量中采用每条的对应公式公式前提大图数据分布式存储获得信息需要多轮同步网络拥堵计算表现不佳解决方案每个将自己拥有的信息压缩成一个包含由完成提交给分发各之后解压只有在之间传递降低通信开销',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-24 00:38:19',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">DCDD-Space</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=8883814231&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/" itemprop="url">知识</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-12-23T08:17:16.375Z" title="发表于 2023-12-23 16:17:16">2023-12-23</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-23T16:38:19.129Z" title="更新于 2023-12-24 00:38:19">2023-12-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/"><header><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/" itemprop="url">知识</a><h1 id="CrawlerTitle" itemprop="name headline">【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">DCDD</span><time itemprop="dateCreated datePublished" datetime="2023-12-23T08:17:16.375Z" title="发表于 2023-12-23 16:17:16">2023-12-23</time><time itemprop="dateCreated datePublished" datetime="2023-12-23T16:38:19.129Z" title="更新于 2023-12-24 00:38:19">2023-12-24</time></header><h1 id="Accelerating-Large-Scale-Prioritized-Graph-Computations-by-Hotness-Balanced-Partition"><a href="#Accelerating-Large-Scale-Prioritized-Graph-Computations-by-Hotness-Balanced-Partition" class="headerlink" title="Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"></a>Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</h1><p>IEEE TRANSACTIONS ON PARALLEL AND DISTRIBUTED SYSTEMS, VOL. 32, NO. 4, APRIL 2021</p>
+<h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h2><p><strong>优先计算</strong>在许多图算法中表现出良好的性能。优先计算优先执行那些在指定收敛中起重要作用的顶点。对于大规模分布式图计算来说，图分区是一个重要的预处理步骤，目的是负载均衡和降低节点之间的通信成本。<br>然而，现有的图分区方法是为<em>轮询round-robin同步分布式框架</em>设计的。他们在不区分顶点重要性的情况下负载均衡，并且没有考虑<em>基于优先级调度</em>的特性，这可能会限制优先图计算的好处。<br>在本文中，为了加速优先迭代图计算，我们提出了 Hotness Balanced Partition (HBP)。在优先图计算中，高优先级的顶点可能会被更频繁地执行，并且可能会传递更多的消息，从而导致热点顶点hot vertices。基于这一点，文章通过根据热度有区别地分配顶点而不是盲目地分配权重相等的顶点来划分图，目的是将hot vertices均匀地分配给workers。<br>文章进一步提供了两种 HBP 算法：<strong>a streaming-based algorithm for efficient one-pass processing</strong>和<strong>a distributed algorithm for distributed processing</strong>。我们的结果表明，我们提出的分区方法优于最先进的分区方法 Fennel、HotGraph 和 SNE。</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><p><strong>分布式图处理系统：</strong> 将大规模图分片，每一个集群上的worker负责处理一个partition:</p>
+<ol>
+<li>大量的 点&#x2F;边分割（edge&#x2F;vertex cut）会加大通信成本。</li>
+<li>由于各节点工作负载不均衡可能会导致出现闲置的worker，降低计算效率。</li>
+</ol>
+<p><em>Prior graph partitioning algorithms</em>：都采用了一个假设：底层的分布式图框架采用<em>synchronous parallel processing model</em>，在每一次迭代(super step)之后有一个<em>全局同步屏障 barrier</em><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/media/16467445002049/16467446775724.jpg"><br>在 round-robin 机制下，实现简单而使用广泛。在每次迭代中，每个点被执行一次，每条边只传递一条信息。因此，在图分区中，点的数量（vertex-centric frameworks）&#x2F;边的数量（edge-centric frameworks）表明了worker的工作量，the number of cutting edges&#x2F; vertex replicas in vertex-cut systems表明了通信的成本。-&gt;故：现存的图分割算法的目标：1.平衡点&#x2F;边数量；2.减少切边&#x2F;点分割的数量<br><strong>asynchronous parallel processing</strong>：近期采用的一些图系统： GraphLab [2],GraphUC [12], Giraph++ [13], GRAPE+ [14] and Maiter。消除了<em>全局同步障碍</em>，worker之间不必等待，边&#x2F;点可以在任何时间执行，取消了一次迭代只能执行一次的约束。所以<em>相同时间间隔内有些点&#x2F;边比其他执行的次数更多</em>，在近期的研究中发现<em>有些点对于最终收敛结果更加重要</em>。在<strong>异步计算</strong>中，顶点的重要性不是持续不变的。在<strong>优先计算</strong>中，只有一部分顶点在一轮迭代中执行，这些顶点计算的更加频繁。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/media/16467445002049/16472514092544.jpg"></p>
+<p><em>优先计算</em>比<em>轮询计算</em>平均快1.2倍。</p>
+<p><strong>Example 1.</strong> <em>prioritized PageRank</em>算法采用priority scheduling（优先调度），每次迭代执行顶点子集。<em>传统的图分割会限制prioritized PageRank计算性能</em></p>
+<blockquote>
+<p>图划分：<br>通用算法：哈希划分算法。为每个数据项(点或 者边)计算一个哈希值，将其映射到一个划分出的子图中</p>
+<p><strong>图流划分streaming graph partition, SGP</strong>：是图划分问题的一个新的衍生。与传统图划分算法相比，图流划分算法<em>不在执行划分算法的计算机上存储完整的图</em>，而是对持续不断地读入的边或者点进行<em>实时划分</em>。这些读入的点或边可以源自计算机集群的硬盘，或者是直接从数据源获取的动态数据。由于不需要在单机上存储完整的图数据，图流划分算法相比传统图划分算法，可以应用于更大规模的图，同时具有时间复杂度低，可以处理动态数据的优势。但是由于其缺少完整的图数据，图流划分的难度更大，而且划分效果往往略差于传统图划分算法。<br>图流划分两种：</p>
+<ol>
+<li>点划分使用<strong>点流（vertex stream）模型</strong>，每次读入的数据项为一个点及其完整的邻接列表。</li>
+<li>边划分使用<strong>边流（edge stream）模型</strong>，每次读入的数据项为一条单独的边。</li>
+</ol>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16472513786711.jpg"></p>
+<blockquote>
+<p>Fennel:2014年WSDM论文《Fennel: Streaming graph partitioning for massive scale graphs》,将图流划分问题划归为流上的模块最大化 (modularity maximization) 问题.<br>Minimizing the number of cut edges and balancing of the partition sizes.<br>Place a vertex to the partition with the least number of non-neighbors</p>
+</blockquote>
+<p>Fennel runtime更高因为没有考虑到点的优先级。如下图<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16468116808201.jpg"><br>a. high-priority点需要更高的计算资源，节点间负载不均衡，会导致计算收敛慢。<br>b. 对于high-priority点之间edge-cut会导致，通信成本剧增，runtime也会上升。</p>
+<p><strong>Motivation：</strong></p>
+<ol>
+<li><em>workload balance并不意味着着计算高效</em>。prioritized processing消除了synchronous barriers,，不同机器之间不用彼此等待，没有空闲节点。对收敛重要的顶点需要更多计算资源，在图分割中需要重点考虑如何处理这些顶点。</li>
+<li><em>小数量的边切割&#x2F;顶点复制不一定意味较少的通信资源开销。</em><br>—&gt;需要一个针对prioritized processing的图分割方法</li>
+</ol>
+<p><strong>Contribution:</strong> <em>Hotness Balanced Partition (HBP)</em></p>
+<ol>
+<li><strong>SPb-HBP</strong>(Streaming-based Per-Bin Hotness Balanced Partition)启发式的基于图流模型的图分割</li>
+<li><strong>DSPb-HBP</strong>分布式场景</li>
+</ol>
+<h2 id="2-Preliminaries-——-DAIC"><a href="#2-Preliminaries-——-DAIC" class="headerlink" title="2 Preliminaries ——   DAIC"></a>2 Preliminaries ——   DAIC</h2><p>**asynchronous Delta-based Accumulative Iterative Computation (asynchronous DAIC)**：<br><em>a typical distributed prioritized iterative computation model</em></p>
+<blockquote>
+<p>顶点可以基于其获得的入边邻居顶点的信息，在任意时刻进行状态update操作。异步DAIC模式可表示为两步操作<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16468168412671.jpg"><br>其中 mj 是顶点 j 的任意邻居顶点发来的信息。每个顶点设置有一块缓存，用来保存这些mj，作为Δvj，用作更新值。<br>当顶点vj判断其缓存的信息包含了所有入边邻居顶点在状态k下的信息时，即可执行更新操作，进入状态k+1，发送权值给出边邻居顶点，并将缓存Δvj清零。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16468177179365.jpg"></p>
+<h3 id="2-1-Asynchronous-DAIC-and-Prioritized-Execution"><a href="#2-1-Asynchronous-DAIC-and-Prioritized-Execution" class="headerlink" title="2.1 Asynchronous DAIC and Prioritized Execution"></a>2.1 Asynchronous DAIC and Prioritized Execution</h3><p>传统<strong>同步</strong>迭代图算法的迭代更新表示：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469145542203.jpg"><br>f是更新函数，k是迭代次数。</p>
+<p><strong>异步DAIC模型</strong>：（顶点可以在任何时间更新）<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469146537903.jpg"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469147803857.jpg"></p>
+<p>priority scheduling比robin scheduling收敛更快，因此找到重要的顶点非常重要<br>找重点顶点的方法：<br>高优先级顶点：max “change”使整幅图变化最大的点<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469151439383.jpg"><br>（注：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469151756353.jpg">是单调的）</p>
+<p><em>prioritized execution优先执行</em>就是在这些顶点上优先计算，加速收敛。<br>本文目标是为优先执行找到一种优化的图分割方式。</p>
+<h3 id="2-2-Prioritized-DAIC-Graph-Algorithms"><a href="#2-2-Prioritized-DAIC-Graph-Algorithms" class="headerlink" title="2.2 Prioritized DAIC Graph Algorithms"></a>2.2 Prioritized DAIC Graph Algorithms</h3><blockquote>
+<p>一些优先DAIC图算法的举例：<br><strong>PageRank：</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469158842393.jpg"><br>d：阻尼系数0.85<br>high execution priority：max <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16473138501083.jpg"></p>
+</blockquote>
+<blockquote>
+<p><strong>Adsorption:</strong> 图标签传播算法<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469179040614.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469181209006.jpg"></p>
+</blockquote>
+<p>还可以使用DAIC的图算法：SSSP,CC,SimRank..</p>
+<p>维护priority排序的代价很大，近似方法：subset of vertices with the highest<br>priority values (e.g., top n%)(subset的大小 平衡priority排序的精确度与频繁截取subset的开销)</p>
+<h2 id="3-PROBLEM-FORMULATION"><a href="#3-PROBLEM-FORMULATION" class="headerlink" title="3 PROBLEM FORMULATION"></a>3 PROBLEM FORMULATION</h2><p><strong>vertex’s hotness</strong>：The frequency of vertex updates<br>本节两点内容：1.如何估计hotness。2.<em>edge-cut</em>的hotness balanced partition</p>
+<h3 id="3-1-Hotness-Estimation"><a href="#3-1-Hotness-Estimation" class="headerlink" title="3.1 Hotness Estimation"></a>3.1 Hotness Estimation</h3><p>hotness of vertex v:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16470895090833.jpg"><br>communication cost of edge(u,v):(与原顶点更新次数成正比,估计为源顶点的hotness)<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469196254171.jpg"></p>
+<h3 id="3-2-patition-goals"><a href="#3-2-patition-goals" class="headerlink" title="3.2 patition goals"></a>3.2 patition goals</h3><p><strong>first goal</strong>：assign the same amount of vertex hotness to workers</p>
+<p>每个worker每轮选择subset顶点执行，若k&#x3D;2,则(b)中G2效率低下，总能选到一个蓝色顶点进行计算。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469200816887.jpg"></p>
+<p>hotness values set: H<br>subset: H’<br>n% &#x3D; |H’|&#x2F;|H|</p>
+<p>理想状态：global priority scheduler 开销过大 ——&gt; 实际：local priority scheduler (per-worker)<br><em>理论1:</em><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469205483629.jpg"></p>
+<p><em>hotness histogram</em><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469843880103.jpg"><br>The vertex hotness values are divided into z continuous non-overlap intervals. Each interval corresponds to a bin Hj holding the vertices whose hotness values are in the jth interval.<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16470930971748.jpg"><br>The height of the histogram bar is the sum of hotness values of vertices in each bin:<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16470931904480.jpg"></p>
+<p><strong>hotness概率分布</strong>：<br>the probability distribution of hotness histogram in original G：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469845418186.jpg"><br>Similarly, the probability distribution of hotness histogram in partition Gi is defined as：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469845223739.jpg"></p>
+<p><strong>概率分布相似性衡量指标</strong>：</p>
+<blockquote>
+<p><em>Jensen Shannon (JS) distance</em>:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469850144505.jpg"></p>
+</blockquote>
+<p>————**Hotness Jensen-Shannon distance (HJS)**：计算分区Gi和图G的hotness分布相似度<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469850991830.jpg"><br>如果<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469851581322.jpg">说明Gi与全局G热度分布一致。HJS越小，一致性越高。<br><em>Example</em>:Fig.4中<br>a.H1&#x3D;{v,8&gt;hv&gt;&#x3D;5},    h2&#x3D;{v,5&gt;hv&gt;&#x3D;1}<br>b.HJS(P||P1)&#x3D;0.296  HJS(P||P2)&#x3D;0.296<br>c.HJS(P||P1)&#x3D;0      HJS(P||P2)&#x3D;0</p>
+<p>fixed z<br><strong>second goal</strong>: minimize the HJS distance between each partition and the original graph<br><strong>third goal</strong>:  minimize the communication cost between partitions.</p>
+<p><em>问题定义</em>：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469857802005.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469857925571.jpg"></p>
+<h2 id="4-SPB-HBP-（Streaming-based-Per-Bin-Hotness-Balanced-Partition）"><a href="#4-SPB-HBP-（Streaming-based-Per-Bin-Hotness-Balanced-Partition）" class="headerlink" title="4.SPB-HBP （Streaming-based Per-Bin Hotness Balanced Partition）"></a>4.SPB-HBP （Streaming-based Per-Bin Hotness Balanced Partition）</h2><h3 id="4-1-Per-Bin-Hotness-Balanced-Partition"><a href="#4-1-Per-Bin-Hotness-Balanced-Partition" class="headerlink" title="4.1 Per-Bin Hotness Balanced Partition"></a>4.1 Per-Bin Hotness Balanced Partition</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469868272487.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469871659145.jpg"><br>由Theorem2得出：goal1与goal2满足任一，两个同时满足。<br>两者合并为一个条件为：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469872931578.jpg"><br>————&gt;<strong>partition goals</strong>:</p>
+<ol>
+<li>balancing the hotness of bin partitions</li>
+<li>minimizing the communication cost</li>
+</ol>
+<h3 id="4-2-Streaming-Based-Heuristic-Algorithm"><a href="#4-2-Streaming-Based-Heuristic-Algorithm" class="headerlink" title="4.2 Streaming-Based Heuristic Algorithm"></a>4.2 Streaming-Based Heuristic Algorithm</h3><p>贪婪算法：新扫描到的顶点会分配给已当前分区(V1; V2; … ; Vk)中的一个分区(Vi)。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469884321860.jpg"><br>the key: design a cost function describes the goals of Pb-HBP.<br>合并4.1中的2个goal提出的损失函数:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469898708890.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469887591788.jpg"><br>1表示将v加入i引起的不平衡  2表示增加的通信成本<br><strong>Algorithm 1.</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16469899527409.jpg"></p>
+<p>在本文中，主要展示edge-cut，但也可以延伸进vertex-cut场景。<br><em>vertex-cut</em>：</p>
+<ol>
+<li>edge不用复制，只需要分配给不同的worker，vertex需要复制。</li>
+<li>edge实际只存储一份，所以edge data不需要传递。而vertex data则需要传递——&gt;存储和通信负载取决于vertex replicas数量。</li>
+</ol>
+<p><strong>vertex-cut hotness balance partition</strong>中:<br>采用<em>edge-centric processing model</em>：</p>
+<ol>
+<li>每条egde的hotness（对应公式4）：communication cost(edge-cut)</li>
+<li>communication cost(公式3）：vertex hotness(edge-cut）</li>
+</ol>
+<p><em>partition goals</em>:</p>
+<ol>
+<li>balancing hotness values of edges</li>
+<li>making the edge hotness distributions consistent</li>
+<li>minimizing the number of vertex cuts</li>
+</ol>
+<h2 id="5-DISTRIBUTED-SPB-HBP"><a href="#5-DISTRIBUTED-SPB-HBP" class="headerlink" title="5 DISTRIBUTED SPB-HBP"></a>5 DISTRIBUTED SPB-HBP</h2><p>前提：大图数据——&gt;分布式存储——&gt;获得neighborhood vertex信息需要多轮同步——&gt;网络拥堵，计算表现不佳</p>
+<p>解决方案：</p>
+<ol>
+<li>每个worker将自己拥有的vertex&#x2F;edge信息压缩成一个local graph summary(包含：topology characteristics、vertex&#x2F;edge hotness),由SPb-HBP完成。</li>
+<li>local graph summary 提交给 global worker，分发各worker，之后解压。</li>
+<li>只有 graph summary 在 worker 之间传递，降低通信开销。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16471610939300.jpg"><br><strong>1.local compression</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/12345.jpg"><br>super-vertex principles:</p>
+<ol>
+<li>The vertices that have <em>higher communication cost</em> should be combined in a super-vertex, in order to <em>avoid cross-partition communication</em>.</li>
+<li>The vertices that have <em>higher communication cost</em> should be combined in a super-vertex, in order to <em>avoid cross-partition communication</em>.</li>
+<li>The vertices that have the <em>same neighbor</em> should be combined in a super-vertex, in order to <em>reduce the number of super-edges</em>.</li>
+<li>Only the vertices that are <em>in the same hotness bin can be combined</em>, in order to keep the hotness bin information for the next global partition phase.</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../media/16467445002049/16471619300445.jpg"><br>Line (9) of Algorithm 2 evaluates <em>how much communication cost can be saved</em> by assigning vertex v to super-vertex v.<br>Broadcasts the computed the <em>vertex-to-supervertex mapping</em> information to other workers(Line 18)<br>Each parallel worker computes the communication cost between its super-vertices and other super-vertices generated by other workers (Line 20-27).<br>Finally, each worker sends <em>the super-vertices set and super-edges set with communication cost</em> to a global worker for global partition (Line 29).</p>
+<p><strong>2. Global Partition</strong><br>use SPb-HBP algorithm (Algorithm 1)<br>( Since we only combine vertices in the same hotness bin during local compression, we can keep these super-vertices in their original hotness bins during global SPb-HBP partition, in order to make the hotness distributions consistent among partitions)</p>
+<p><strong>3. Local Decompression</strong><br>super-vertices are then decompressed on each worker in parallel.<br>The vertices and edges are also relabelled with new ids based on the <em>vertex-to-supervertex map</em> and the <em>supervertex-to-partition map</em>.<br>a more hotness balanced and communication-minimized partition is achieved.</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">DCDD</div><div class="post-copyright__author_desc">欢迎光临</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/')">【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://dipsyz.github.io/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://DipsyZ.github.io" target="_blank">DCDD-Space</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="/media/16467445002049/16471619300445.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/12/22/hello-world/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">这有关于<b style="color:#fff">产品、设计、开发</b>相关的问题和看法，还有<b style="color:#fff">文章翻译</b>和<b style="color:#fff">分享</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">DCDD</h1><div class="author-info__desc">欢迎光临</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/DipsyZ" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/372204786" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.douyin.com/user/MS4wLjABAAAAw4mebfeV_Rp__j9BGGvr8BUaXLbMxiFRAVpKVgPj8Wg" target="_blank" title="Douyin"><i class="fab fa-tiktok faa-tada"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Accelerating-Large-Scale-Prioritized-Graph-Computations-by-Hotness-Balanced-Partition"><span class="toc-number">1.</span> <span class="toc-text">Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">摘要：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.2.</span> <span class="toc-text">1.Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Preliminaries-%E2%80%94%E2%80%94-DAIC"><span class="toc-number">1.3.</span> <span class="toc-text">2 Preliminaries ——   DAIC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Asynchronous-DAIC-and-Prioritized-Execution"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 Asynchronous DAIC and Prioritized Execution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Prioritized-DAIC-Graph-Algorithms"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2 Prioritized DAIC Graph Algorithms</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PROBLEM-FORMULATION"><span class="toc-number">1.4.</span> <span class="toc-text">3 PROBLEM FORMULATION</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Hotness-Estimation"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 Hotness Estimation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-patition-goals"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 patition goals</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-SPB-HBP-%EF%BC%88Streaming-based-Per-Bin-Hotness-Balanced-Partition%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">4.SPB-HBP （Streaming-based Per-Bin Hotness Balanced Partition）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Per-Bin-Hotness-Balanced-Partition"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1 Per-Bin Hotness Balanced Partition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Streaming-Based-Heuristic-Algorithm"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2 Streaming-Based Heuristic Algorithm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-DISTRIBUTED-SPB-HBP"><span class="toc-number">1.6.</span> <span class="toc-text">5 DISTRIBUTED SPB-HBP</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/" title="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/media/16467445002049/16471619300445.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition"/></a><div class="content"><a class="title" href="/2023/12/23/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%931/" title="【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition">【论文总结】Accelerating Large-Scale Prioritized Graph Computations by Hotness Balanced Partition</a><time datetime="2023-12-23T08:17:16.375Z" title="发表于 2023-12-23 16:17:16">2023-12-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/22/hello-world/" title="Hello World"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/default_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2023/12/22/hello-world/" title="Hello World">Hello World</a><time datetime="2023-12-22T09:18:57.398Z" title="发表于 2023-12-22 17:18:57">2023-12-22</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="DCDD" target="_blank">DCDD</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">1</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/?id=8883814231&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("25/12/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 DCDD 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="标签"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
